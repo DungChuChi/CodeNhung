@@ -1,0 +1,100 @@
+// Nguyễn Mạnh Dũng - 22146287
+// Nguyễn Lê Duy - 22146285
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <errno.h> 
+#include "tcs34725_library.h"
+
+#define DEVICE_PATH "/dev/tcs34725"
+
+int fd;
+void turn_On_Sensor()
+{
+	fd = open(DEVICE_PATH, O_RDWR);
+    if (fd < 0) 
+	{
+        printf("loi roi\n");
+    }
+}
+void Init_Enable(int value)
+{
+	if (ioctl(fd, TCS34725_IOCTL_SET_UP_ENABLE, &value) < 0) {
+        printf("loi roi ENABLE\n");       
+    }
+}
+void Init_Atime(int value)
+{
+	if (ioctl(fd, TCS34725_IOCTL_SET_UP_ATIME, &value) < 0) {
+        printf("loi roi ATIME\n");       
+    }
+}
+void Init_Wtiem(int value)
+{
+	if (ioctl(fd, TCS34725_IOCTL_SET_UP_WTIME, &value) < 0) {
+        printf("loi roi WTIME\n");       
+    }
+}
+void Init_Pers(int value)
+{
+	if (ioctl(fd, TCS34725_IOCTL_SET_UP_PPERS, &value) < 0) {
+        printf("loi roi PERS\n");       
+    }
+}
+void Init_Config(int value)
+{
+	if (ioctl(fd, TCS34725_IOCTL_SET_UP_CONFIG, &value) < 0) {
+        printf("loi roi CONFIG\n");       
+    }
+}
+void Init_Control(int value)
+{
+	if (ioctl(fd, TCS34725_IOCTL_SET_UP_GAIN, &value) < 0) {
+			printf("loi roi GAIN\n");       
+		}
+}
+int Read_ID()
+{
+	int value;
+	if (ioctl(fd, TCS34725_IOCTL_SET_UP_ID, &value) < 0) {
+			printf("loi roi ID\n");       
+		}
+	return value;
+}
+int Read_CLEAR_data()
+{
+	int value;
+	if (ioctl(fd, TCS34725_IOCTL_READ_CLEAR, &value) < 0) {
+			printf("loi roi CLEAR\n");       
+		}
+	return value;
+}
+
+int Read_RED_data()
+{
+	int value;
+	if (ioctl(fd, TCS34725_IOCTL_READ_RED, &value) < 0) {
+			printf("loi roi RED\n");       
+		}
+	return value;
+}
+
+int Read_GREEN_data()
+{
+	int value;
+	if (ioctl(fd, TCS34725_IOCTL_READ_GREEN, &value) < 0) {
+			printf("loi roi GREEN\n");       
+		}
+	return value;
+}
+int Read_BLUE_data()
+{
+	int value;
+	if (ioctl(fd, TCS34725_IOCTL_READ_BLUE, &value) < 0) {
+			printf("loi roi BLUE\n");       
+		}
+	return value;
+}
+
